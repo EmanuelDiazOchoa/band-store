@@ -27,7 +27,7 @@ export default function MySwiper() {
         <SwiperSlide className="swiper-slide-5215">
           <img
             className="swiper-slide-bg-image swiper-slide-bg-image-bdb6 swiper-gl-image"
-            src="https://cdn.studio.swiperjs.com/teal-ceciley-159/734d66c6154f7e54d060.png"
+            src="../../public/img/1Floyd.jpg"
           />
 
           <div className="swiper-slide-content swiper-slide-content-94be">
@@ -40,7 +40,7 @@ export default function MySwiper() {
         <SwiperSlide className="swiper-slide-5215">
           <img
             className="swiper-slide-bg-image swiper-slide-bg-image-bdb6 swiper-gl-image"
-            src='@/public/img/1Floyd.jpg'
+            src="../../public/img/2Roses.webp"
           />
 
           <div className="swiper-slide-content swiper-slide-content-94be">
