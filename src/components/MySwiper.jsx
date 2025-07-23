@@ -45,7 +45,7 @@ export default function MySwiper() {
 
           <div className="swiper-slide-content swiper-slide-content-94be">
             <div className="swiper-slide-text swiper-slide-text-66a3">
-              Guns n´ Roses
+              Guns n Roses
             </div>
           </div>
         </SwiperSlide>
