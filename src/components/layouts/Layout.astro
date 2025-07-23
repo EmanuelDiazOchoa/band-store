@@ -1,0 +1,22 @@
+---
+import Navbar from '@components/Navbar.astro'
+import "../../styles/global.css";
+const { title = "My Band" } = Astro.props;
+---
+
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{title}</title>
+  </head>
+  <body class="bg-zinc-950 text-white">
+    <Navbar />
+    <main class="p-8">
+      <slot />
+    </main>
+    <footer>
+      ©All are my favorite bands all rights are reserved by me 2025. All rights reserved
+    </footer>
+  </body>
+</html>

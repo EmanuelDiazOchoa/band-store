@@ -1,122 +1,101 @@
-import { useEffect, useRef, useState } from "react"
-import gsap from "gsap"
+import { useState, useRef, useEffect } from "react";
+import { gsap } from "gsap";
+
+const navItems = ["Home", "News", "Gallery", "Store"];
 
 export default function CustomNavbar() {
-  const navRef = useRef(null)
-  const mobileMenuRef = useRef(null)
-  const [open, setOpen] = useState(false)
-
-  const navItems = [
-    { name: "Inicio", href: "/" },
-    { name: "Tienda", href: "/shop" },
-    { name: "Carrito", href: "/cart" },
-    { name: "Contacto", href: "/contact" },
-  ]
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const indicatorRef = useRef(null);
+  const linksRef = useRef([]);
 
   useEffect(() => {
-    const links = navRef.current.querySelectorAll("a")
-    gsap.from(links, {
-      y: -20,
-      opacity: 0,
-      duration: 0.5,
-      stagger: 0.1,
-      ease: "power2.out",
-    })
-  }, [])
-
-  useEffect(() => {
-    if (open) {
-      gsap.to(mobileMenuRef.current, {
-        y: 0,
-        opacity: 1,
-        duration: 0.4,
-        ease: "power2.out",
-        display: "flex",
-      })
-    } else {
-      gsap.to(mobileMenuRef.current, {
-        y: -20,
-        opacity: 0,
+    const link = linksRef.current[activeIndex];
+    if (link && indicatorRef.current) {
+      gsap.to(indicatorRef.current, {
+        x: link.offsetLeft,
+        width: link.offsetWidth,
         duration: 0.3,
-        ease: "power2.in",
-        onComplete: () => {
-          if (mobileMenuRef.current) {
-            mobileMenuRef.current.style.display = "none"
-          }
-        },
-      })
+        ease: "power2.out",
+      });
     }
-  }, [open])
+  }, [activeIndex]);
+
+  const toggleMenu = () => setMenuOpen(!menuOpen);
 
   return (
-    <header className="bg-zinc-900 shadow-md">
-      <nav
-        ref={navRef}
-        className="max-w-7xl mx-auto flex justify-between items-center px-4 py-3"
-      >
-        <div className="text-white text-xl font-bold">Band Store</div>
+    <nav className="bg-zinc-900 text-white shadow-md">
+      <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+        <h1 className="text-xl font-bold">Mi Sitio</h1>
 
-        {/* Desktop Menu */}
-        <ul className="hidden md:flex gap-6">
-          {navItems.map((item) => (
-            <li key={item.name}>
+        {/* Desktop nav */}
+        <div className="relative hidden md:flex items-center space-x-6">
+          <div
+            ref={indicatorRef}
+            className="absolute bottom-0 h-[2px] bg-cyan-400 transition-all duration-300"
+          />
+          {navItems.map((item, i) => {
+            const href = item === "Home" ? "/" : `/${item.toLowerCase()}`;
+            return (
               <a
-                href={item.href}
-                className="text-white/80 hover:text-white transition duration-300"
+                key={i}
+                ref={(el) => (linksRef.current[i] = el)}
+                href={href}
+                onClick={() => setActiveIndex(i)}
+                className={`relative z-10 px-2 pb-1 transition-colors ${
+                  activeIndex === i
+                    ? "text-white"
+                    : "text-white/60 hover:text-white"
+                }`}
               >
-                {item.name}
+                {item}
               </a>
-            </li>
-          ))}
-        </ul>
+            );
+          })}
+        </div>
 
-        {/* Mobile toggle */}
-        <button
-          className="md:hidden text-white"
-          onClick={() => setOpen(!open)}
-          aria-label="Toggle menu"
-        >
-          <svg
-            className="w-6 h-6"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            viewBox="0 0 24 24"
-          >
-            {open ? (
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M6 18L18 6M6 6l12 12"
-              />
-            ) : (
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M4 6h16M4 12h16M4 18h16"
-              />
-            )}
-          </svg>
+        {/* Mobile button */}
+        <button className="md:hidden text-white" onClick={toggleMenu}>
+          {menuOpen ? (
+            <svg className="h-8 w-8" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          ) : (
+            <svg className="h-8 w-8" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          )}
         </button>
-      </nav>
+      </div>
 
-      {/* Mobile Menu */}
-      <ul
-        ref={mobileMenuRef}
-        className="md:hidden flex-col gap-4 px-4 py-3 bg-zinc-800 text-white hidden"
+      {/* Mobile menu */}
+      <div
+        className={`md:hidden overflow-hidden transition-all duration-300 ${
+          menuOpen ? "max-h-60" : "max-h-0"
+        }`}
       >
-        {navItems.map((item) => (
-          <li key={item.name}>
-            <a
-              href={item.href}
-              onClick={() => setOpen(false)}
-              className="block py-2 text-white/80 hover:text-white transition duration-300"
-            >
-              {item.name}
-            </a>
-          </li>
-        ))}
-      </ul>
-    </header>
-  )
+        <ul className="flex flex-col items-start gap-2 px-4 pb-4">
+          {navItems.map((item, i) => {
+            const href = item === "Home" ? "/" : `/${item.toLowerCase()}`;
+            return (
+              <li key={i}>
+                <a
+                  href={href}
+                  onClick={() => {
+                    setActiveIndex(i);
+                    setMenuOpen(false);
+                  }}
+                  className={`block w-full text-left py-2 px-2 rounded hover:bg-cyan-600 transition-colors ${
+                    activeIndex === i ? "text-white" : "text-white/60"
+                  }`}
+                >
+                  {item}
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+    </nav>
+  );
 }
