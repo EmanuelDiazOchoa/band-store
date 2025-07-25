@@ -2,53 +2,64 @@
 
 :root {
   --swiper-navigation-color: rgba(255, 255, 255, 1);
+  --swiper-navigation-top-offset: 50%;
 }
 
-.swiper {
-  user-select: none;
-  box-sizing: border-box;
-  overflow: hidden;
+/* Forzamos altura inicial útil */
+.swiper,
+.swiper-container {
+  height: 90vh;
+  min-height: 400px;
   width: 100%;
-
-  height: 100%;
-
-  padding: 0px 0px;
+  box-sizing: border-box;
+  user-select: none;
+  overflow: hidden;
+  padding: 0;
 }
 
 .swiper-slide {
+  position: relative;
+  width: 100%;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  height: 100%;
-  position: relative;
+  background: #111;
   box-sizing: border-box;
 }
 
+/* Asegura que la imagen se escale correctamente */
 .swiper-slide-bg-image {
   position: absolute;
-  left: 0%;
-  top: 0%;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
+  object-fit: cover;
   max-width: none;
   z-index: 0;
 }
 
+/* Contenedor del contenido sobre la imagen */
 .swiper-slide-content {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  position: relative;
+  position: absolute;
+  bottom: 2rem;
+  left: 2rem;
   z-index: 1;
-  box-sizing: border-box;
+  width: auto;
+  color: white;
+  font-size: 2rem;
+  font-weight: bold;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
 }
 
+/* Estilos heredados de tu CSS, optimizados */
 .swiper-slide-bg-image-bdb6 {
   object-fit: cover;
   border-radius: inherit;
   opacity: 1;
 }
+
 .swiper-slide-content-94be {
   padding: 32px 16px;
   flex-direction: column;
@@ -56,6 +67,7 @@
   align-items: flex-start;
   justify-content: flex-end;
 }
+
 .swiper-slide-text-66a3 {
   color: rgba(255, 255, 255, 1);
   text-align: left;
@@ -63,69 +75,33 @@
   line-height: 1.5;
   font-weight: bold;
 }
+
 .swiper-slide-image-9428 {
   max-width: 100%;
-  min-width: 0;
   max-height: 100%;
-  min-height: 0;
   object-fit: contain;
   opacity: 1;
   filter: blur(0px);
 }
 
+/* Responsive */
 @media (min-width: 768px) {
-  .swiper {
-    width: 100%;
-
-    height: 100%;
-
-    padding: 0px 0px;
-  }
-
+  .swiper,
   .swiper-slide {
-    width: 100%;
-    height: 100%;
-  }
-
-  :root {
-    --swiper-navigation-top-offset: 50%;
+    height: 90vh;
   }
 }
 
 @media (min-width: 1280px) {
-  .swiper {
-    width: 100%;
-
-    height: 100%;
-
-    padding: 0px 0px;
-  }
-
+  .swiper,
   .swiper-slide {
-    width: 100%;
-    height: 100%;
-  }
-
-  :root {
-    --swiper-navigation-top-offset: 50%;
+    height: 90vh;
   }
 }
 
 @media (min-width: 1920px) {
-  .swiper {
-    width: 100%;
-
-    height: 100%;
-
-    padding: 0px 0px;
-  }
-
+  .swiper,
   .swiper-slide {
-    width: 100%;
-    height: 100%;
-  }
-
-  :root {
-    --swiper-navigation-top-offset: 50%;
+    height: 90vh;
   }
 }
