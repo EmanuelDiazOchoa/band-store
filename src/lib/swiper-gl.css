@@ -42,3 +42,7 @@
   left: 0;
   top: 0;
 }
+
+.swiper-gl-image {
+  object-fit: contain !important; 
+}

@@ -1,10 +1,9 @@
-import "./MySwiper.css";
-import "./swiper-gl.css";
-
 import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { A11y, Autoplay, Navigation } from "swiper/modules";
 
+import "./MySwiper.css";
+import "../lib/swiper-gl.css"
 import "swiper/css";
 import "swiper/css/a11y";
 import "swiper/css/autoplay";
@@ -15,7 +14,7 @@ export default function MySwiper() {
 
 
   useEffect(() => {
-    import("../lib/swiper-gl.esm.js").then((module) => {
+    import("../lib/swiper-gl.esm").then((module) => {
       setSwiperModules((mods) => [...mods, module.default]);
     });
   }, []);
