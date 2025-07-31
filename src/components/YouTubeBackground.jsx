@@ -1,39 +1,40 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const videos = [
   "73Bpyta8vOs", // Pink Floyd
   "qnFU-DxwpRs", // Guns N Roses
-  "PMPnE9810Fc", // Peppers
-  "7-thChxjcVw", // Black Sabbath
+  "PMPnE9810Fc", // Red Hot
+  "7-thChxjcVw", // Sabbath
   "Opxhh9Oh3rg", // Beatles
-  "PD-MdiUm1_Y", // Led Zeppelin
+  "PD-MdiUm1_Y", // Zeppelin
   "k2hGmoWFzaA", // REM
-  "whQQpwwvSh4", // AC/DC
+  "whQQpwwvSh4", // ACDC
   "U5HAEzEk8QM", // Rammstein
-  "UfA2hODCVAI", // Rolling Stones
+  "UfA2hODCVAI"  // Rolling Stones
 ];
 
 export default function VideoBackground() {
-  const iframeRef = useRef(null);
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setIndex((prev) => (prev + 1) % videos.length);
-    }, 60000); // cada 1 minuto
+    }, 60000); // cambia cada 1 minuto
 
     return () => clearInterval(interval);
   }, []);
 
+  const videoId = videos[index];
+  const url = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&controls=0&playlist=${videoId}&modestbranding=1&rel=0`;
+
   return (
-    <div className="fixed inset-0 -z-10 overflow-hidden">
+    <div className="fixed inset-0 -z-10 pointer-events-none">
       <iframe
-        key={videos[index]}
-        ref={iframeRef}
-        className="w-full h-full pointer-events-none"
-        src={`https://www.youtube.com/embed/${videos[index]}?autoplay=1&mute=1&controls=0&loop=1&playlist=${videos[index]}&modestbranding=1&showinfo=0&rel=0`}
+        key={videoId}
+        src={url}
         frameBorder="0"
-        allow="autoplay"
+        allow="autoplay; fullscreen"
+        className="w-full h-full object-cover"
         allowFullScreen
       />
     </div>

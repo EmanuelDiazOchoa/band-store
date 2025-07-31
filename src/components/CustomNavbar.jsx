@@ -24,9 +24,9 @@ export default function CustomNavbar() {
   const toggleMenu = () => setMenuOpen(!menuOpen);
 
   return (
-    <nav className="bg-zinc-900 text-white shadow-md">
-      <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
-        <h1 className="text-xl font-bold">Mi Sitio</h1>
+    <nav className="bg-transparent  z-20 text-white">
+
+      <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-center">
 
         {/* Desktop nav */}
         <div className="relative hidden md:flex items-center space-x-6">

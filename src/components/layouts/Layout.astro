@@ -1,27 +1,39 @@
 ---
-import Navbar from '@components/Navbar.astro'
+import CustomNavbar from '@components/CustomNavbar.jsx'; // O Navbar.astro si usás ese
+import VideoYoutube from '@components/YouTubeBackground'; // Tu video background rotativo
 import "../../styles/global.css";
 import { ClientRouter } from 'astro:transitions';
+
 const { title = "My Bands" } = Astro.props;
 ---
 
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-     <ClientRouter />
+    <ClientRouter />
     <meta name="viewport" content="width=device-width" />
     <title>{title}</title>
   </head>
-  
-  <body class="bg-zinc-950 text-white min-h-screen flex flex-col">
-    <Navbar />
+
+  <body class="bg-transparent text-white min-h-screen flex flex-col relative overflow-hidden">
+
     
-    <main class="flex-grow">
+    <VideoYoutube client:load />
+
+    
+    <CustomNavbar client:load />
+
+    
+    <main class="flex-grow relative z-10 bg-transparent">
       <slot />
     </main>
-    
-    <footer class="bg-black/40 text-white text-center py-4 text-sm w-full">
+
+    <!-- FOOTER TRANSPARENTE -->
+    <footer class="bg-transparent text-white text-center py-4 text-sm relative z-10">
       © All are my favorite bands, all rights are reserved by me 2025.
     </footer>
+    
   </body>
 </html>
+
+
