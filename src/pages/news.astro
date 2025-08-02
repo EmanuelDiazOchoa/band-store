@@ -1,8 +1,19 @@
 ---
-import Layout from '@components/layouts/Layout.astro';
+import Layout from "@components/layouts/Layout.astro";
+import BandNews from "@components/BandNews.jsx";
 ---
 
-<Layout>
-  <h1 class="text-3xl font-bold mb-4">Welcome to last notice</h1>
-  <p>last news</p>
+<Layout title="News">
+  <div class="p-4 max-w-screen-2xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 min-h-[85vh]">
+    <BandNews client:load band="Pink Floyd" />
+    <BandNews client:load band="Guns N Roses" />
+    <BandNews client:load band="Red Hot Chili Peppers" />
+    <BandNews client:load band="Black Sabbath" />
+    <BandNews client:load band="The Beatles" />
+    <BandNews client:load band="Led Zeppelin" />
+    <BandNews client:load band="REM" />
+    <BandNews client:load band="ACDC" />
+    <BandNews client:load band="Rammstein" />
+    <BandNews client:load band="Rolling Stones" />
+  </div>
 </Layout>
